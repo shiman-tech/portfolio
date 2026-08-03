@@ -1,4 +1,4 @@
-name: Portfolio Pipeline
+name: Portfolio CI/CD
 
 on:
   push:
@@ -6,23 +6,61 @@ on:
       - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      # 1. Clone the repository
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
+      # 2. Install Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
 
-      - name: Install dependencies
+      # 3. Install project dependencies
+      - name: Install Dependencies
         run: npm ci
 
+      # 4. Lint the project
       - name: Run ESLint
         run: npm run lint
 
-      - name: Build project
-        run: npm run build
+      # 5. Install Vercel CLI
+      - name: Install Vercel CLI
+        run: npm install --global vercel
+
+      # 6. Download Vercel project configuration
+      - name: Pull Vercel Project Configuration
+        run: |
+          vercel pull \
+            --yes \
+            --environment=production \
+            --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+      # 7. Build exactly as Vercel would
+      - name: Build Project
+        run: |
+          vercel build \
+            --prod \
+            --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+      # 8. Deploy the already-built artifact
+      - name: Deploy to Production
+        run: |
+          vercel deploy \
+            --prebuilt \
+            --prod \
+            --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
