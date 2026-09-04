@@ -1,73 +1,108 @@
-# React + TypeScript + Vite
+# ⚡ Personal Developer Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, high-performance developer portfolio built with **React 19**, **TypeScript**, **Tailwind CSS 4**, and **Framer Motion**. Designed with an immersive dark aesthetic, glassmorphism UI, smooth micro-interactions, and interactive 3D physics.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ Features
 
-## React Compiler
+- 🌌 **Interactive Starfield & Cursor Spotlight** — Dynamic HTML5 Canvas particle background with mouse-tracking ambient spotlight.
+- 🎴 **3D Tilt & Magnetic Interactions** — Spring-physics 3D tilt cards for project showcases and magnetic physics buttons.
+- 🎨 **Sleek Glassmorphism Design System** — Tailored HSL color palettes, cybernetic cyan/violet glow borders, and clean typography.
+- 📊 **Animated Counters & Progress Metrics** — Viewport-triggered easing animation for statistics and achievements with decimal precision support.
+- 📂 **Multi-Category Project Filtering** — Filter work across Full-Stack, Mobile, and AI/ML domains.
+- 📬 **Interactive Contact Form** — Connected via Web3Forms with real-time field validation and toast notifications.
+- 🌓 **Theme Support** — Built-in theme switcher with smooth color transitions and persistent state.
+- 📱 **Mobile-First & Accessible** — Fully responsive across all breakpoints with clean semantic HTML.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+| Layer | Technology |
+|---|---|
+| **Core Framework** | [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/) |
+| **Build Tool** | [Vite 8](https://vitejs.dev/) |
+| **Styling** | [Tailwind CSS 4](https://tailwindcss.com/) + Custom CSS Variables |
+| **Animations & Physics** | [Framer Motion](https://www.framer.com/motion/) |
+| **Icons & Notifications** | [React Icons](https://react-icons.github.io/react-icons/) · [React Hot Toast](https://react-hot-toast.com/) |
+| **Deployment & CI/CD** | [Vercel](https://vercel.com/) · GitHub Actions |
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 📁 Project Structure
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+portfolio/
+├── public/                     # Static assets (favicons, icons, resume)
+├── src/
+│   ├── assets/                 # App assets & media
+│   ├── components/
+│   │   ├── layout/             # Navigation, Footer, ScrollProgress, LoadingScreen
+│   │   ├── sections/           # Hero, About, Skills, Projects, Experience, Certifications, Hackathons, Contact
+│   │   └── ui/                 # MagneticButton, ProjectCard, AnimatedCounter, ParticleBackground, Spotlight
+│   ├── data/
+│   │   └── portfolio.ts        # Centralized portfolio data & content configuration
+│   ├── hooks/                  # Custom React hooks (useTheme, etc.)
+│   ├── App.tsx                 # Root application component
+│   ├── index.css               # Global theme tokens, typography & Tailwind layers
+│   └── main.tsx                # Entry point
+├── .github/workflows/          # CI/CD deployment pipelines
+└── vite.config.ts              # Vite configuration
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🚀 Getting Started
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Prerequisites
+
+- **Node.js**: `18.x` or higher
+- **npm** or **yarn** / **pnpm**
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/shiman-tech/portfolio.git
+   cd portfolio
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Environment Setup (Optional):**
+   Copy the example environment configuration:
+   ```bash
+   cp .env.example .env.local
+   ```
+
+   Add your [Web3Forms Access Key](https://web3forms.com/) for contact form delivery:
+   ```env
+   VITE_WEB3FORMS_ACCESS_KEY=your_web3forms_key_here
+   ```
+
+4. **Start the local development server:**
+   ```bash
+   npm run dev
+   ```
+   Open `http://localhost:5173` in your browser.
+
+---
+
+## 📦 Scripts
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Starts the Vite development server with Hot Module Replacement (HMR) |
+| `npm run build` | Type-checks with `tsc` and creates an optimized production bundle in `dist/` |
+| `npm run preview` | Locally previews the production build output |
+| `npm run lint` | Runs ESLint to check for code quality and style issues |
+
+---
+
+## 📄 License
+
+This project is open-source and available under the [MIT License](LICENSE).
