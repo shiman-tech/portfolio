@@ -110,14 +110,6 @@ export function Hero() {
               transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
             >
               <motion.div className="relative flex h-full w-full items-center justify-center bg-gradient-to-br from-[#151c2c] to-[#0b0f19]">
-                <img
-                  src="/profile.png"
-                  alt="Shiman Kumar D"
-                  className="absolute inset-0 h-full w-full object-cover"
-                  onError={(e) => {
-                    e.currentTarget.style.display = 'none'
-                  }}
-                />
                 <span className="text-gradient text-6xl font-bold sm:text-7xl">SK</span>
               </motion.div>
             </motion.div>

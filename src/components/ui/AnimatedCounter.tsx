@@ -5,6 +5,7 @@ interface AnimatedCounterProps {
   value: number
   prefix?: string
   suffix?: string
+  decimals?: number
   label: string
   detail?: string
 }
@@ -13,29 +14,30 @@ export function AnimatedCounter({
   value,
   prefix = '',
   suffix = '',
+  decimals,
   label,
   detail,
 }: AnimatedCounterProps) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-40px' })
-  const [count, setCount] = useState(0)
+  const decPlaces = decimals ?? (Number.isInteger(value) ? 0 : 2)
+  const [count, setCount] = useState<string>(decPlaces > 0 ? (0).toFixed(decPlaces) : '0')
 
   useEffect(() => {
     if (!inView) return
-    let start = 0
     const duration = 1500
     const startTime = performance.now()
 
     const tick = (now: number) => {
       const progress = Math.min((now - startTime) / duration, 1)
       const eased = 1 - Math.pow(1 - progress, 3)
-      start = Math.round(eased * value)
-      setCount(start)
+      const current = eased * value
+      setCount(decPlaces > 0 ? current.toFixed(decPlaces) : Math.round(current).toString())
       if (progress < 1) requestAnimationFrame(tick)
     }
 
     requestAnimationFrame(tick)
-  }, [inView, value])
+  }, [inView, value, decPlaces])
 
   return (
     <motion.div

@@ -99,12 +99,6 @@ export function Contact() {
                 href: `mailto:${personal.email}`,
               },
               {
-                icon: FaEnvelope,
-                label: 'Email (personal)',
-                value: personal.emailAlt,
-                href: `mailto:${personal.emailAlt}`,
-              },
-              {
                 icon: FaPhone,
                 label: 'Phone',
                 value: personal.phone,

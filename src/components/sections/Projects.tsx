@@ -11,9 +11,9 @@ export function Projects() {
 
   const filtered = projects.filter((p) => {
     if (active === 'All') return true
-    if (active === 'Full-Stack') return p.id === 'stream-sphere'
-    if (active === 'Mobile') return p.id === 'smart-shop'
-    if (active === 'AI/ML') return p.id === 'herd-ai'
+    if (active === 'Full-Stack') return p.id === 'stream-sphere' || p.id === 'public-eye'
+    if (active === 'Mobile') return p.id === 'herd-ai'
+    if (active === 'AI/ML') return p.id === 'herd-ai' || p.id === 'public-eye'
     return true
   })
 
